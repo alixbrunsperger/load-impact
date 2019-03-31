@@ -1,0 +1,307 @@
+$primary-color: #3e556c;
+$alternate-color: rgb(33, 141, 179);
+$white: #fff;
+$text-color: #fff;
+$radius: 10px;
+
+$break-small: 320px;
+$break-middle: 600px;
+$break-large: 1025px;
+
+$small-space: 10px;
+$standard-space: 25px;
+
+body {
+  background-color: #3e556c;
+  color: $text-color;
+  margin: 0 auto;
+  max-width: 920px;
+}
+
+.main-header {
+  align-items: center;
+  border-bottom: 1px solid $alternate-color;
+  display: grid;
+  grid-template-areas: ". title menu";
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 80px;
+  justify-items: center;
+  margin-bottom: $standard-space;
+
+  & .title {
+    grid-area: title;
+    grid-column-start: 2;
+  }
+
+  & .menu {
+    grid-area: menu;
+
+    & picture img {
+      width: 40px;
+    }
+
+    @media (min-width: $break-middle) {
+      background-color: $alternate-color;
+      box-sizing: border-box;
+      color: $text-color;
+      padding: $small-space;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: $break-middle) {
+    grid-template-areas:
+      "title"
+      "menu";
+    grid-template-columns: 1fr;
+
+    & .title {
+      grid-area: title;
+      grid-column-start: auto;
+    }
+  }
+}
+
+section[role="main"] {
+  display: grid;
+  grid-template-areas:
+    "search"
+    "result";
+  padding: $small-space;
+  @media (min-width: $break-middle) {
+    grid-column-gap: $small-space;
+    grid-template-areas:
+      "search search"
+      "result content";
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: $break-large) {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.search {
+  grid-area: search;
+  max-width: 599px;
+  @media (min-width: $break-middle) {
+    margin: auto;
+  }
+
+  & .search-header {
+    font-size: 20px;
+    margin-bottom: $small-space;
+    & i {
+      color: $text-color;
+      font-size: 16px;
+    }
+  }
+
+  & input {
+    background-color: $alternate-color;
+    border: 1px solid $alternate-color;
+    color: $text-color;
+    font-size: 20px;
+    height: $standard-space;
+    margin: $small-space 0;
+    padding: 1% 2%;
+    width: 93%;
+  }
+}
+
+.input-block {
+  position: relative;
+
+  & > picture {
+    display: none;
+
+    &.visible {
+      display: block;
+    }
+  }
+}
+
+.close-icon,
+.search-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 5.5%;
+  top: 17px;
+  width: 20px;
+}
+.search-icon {
+  pointer-events: none;
+}
+
+.suggestion-container {
+  max-width: 599px;
+  & .suggestion-list {
+    background-color: $alternate-color;
+    border-top: 1px solid $primary-color;
+    color: $text-color;
+    cursor: pointer;
+    padding: 1%;
+    position: absolute;
+    top: 47px;
+    width: 95.5%;
+    z-index: 2;
+
+    & .suggestion {
+      font-size: 20px;
+      height: 40px;
+      line-height: 40px;
+
+      &:not(:last-child) {
+        border-bottom: 1px dotted $primary-color;
+      }
+
+      & b {
+        font-size: 23px;
+      }
+
+      &.close {
+        box-sizing: border-box;
+        font-size: 15px;
+        font-style: italic;
+        height: 35px;
+        line-height: 30px;
+        padding-right: 40px;
+        position: relative;
+        text-align: right;
+      }
+
+      & .close-icon {
+        right: 2%;
+        top: 5px;
+      }
+    }
+  }
+}
+
+.result {
+  grid-area: result;
+  max-width: 599px;
+
+  @media (min-width: $break-large) {
+    max-width: 355px;
+  }
+  & header {
+    font-size: 20px;
+    margin: $small-space 0;
+  }
+
+  & .result-link {
+    align-items: center;
+    background-color: $alternate-color;
+    border: 2px solid $white;
+    border-radius: $radius;
+    display: grid;
+    font-size: 15px;
+    font-weight: bold;
+    grid-template-columns: 9fr 1fr;
+    height: 25px;
+    justify-items: left;
+    line-height: 25px;
+    margin: $small-space 0;
+    padding: $small-space;
+
+    &.selected {
+      background-color: $white;
+      border-color: $alternate-color;
+      color: $primary-color;
+    }
+
+    & > div {
+      max-width: 279px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    & picture {
+      text-align: center;
+      width: 100%;
+    }
+    & img {
+      text-align: center;
+      vertical-align: middle;
+      width: 20px;
+    }
+  }
+  & .result-content {
+    background-color: $white;
+    border: 2px solid $alternate-color;
+    border-radius: $radius;
+    color: $primary-color;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    width: 99%;
+
+    & img {
+      margin: $small-space;
+      width: 60%;
+    }
+  }
+}
+
+.pagination {
+  & .pagination-button {
+    background-color: $white;
+    border: none;
+    border-radius: $radius;
+    color: $primary-color;
+    cursor: pointer;
+    font: inherit;
+    height: 35px;
+    line-height: 35px;
+    padding: 0;
+    width: 100%;
+  }
+  & .pagination-numbers {
+    font-size: 20px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+picture {
+  text-align: center;
+}
+
+.content {
+  padding: $small-space;
+  & header {
+    margin-top: $small-space;
+    text-align: center;
+  }
+  & .result-content {
+    align-items: center;
+    background-color: $white;
+    border: 2px solid $alternate-color;
+    border-radius: $radius;
+    color: $primary-color;
+    display: grid;
+    grid-area: content;
+    justify-content: center;
+    margin-top: 33px;
+    width: 99%;
+
+    & header {
+      grid-column: 1 / span 2;
+    }
+
+    & img {
+      margin: $small-space;
+      width: 60%;
+    }
+
+    @media (min-width: $break-large) {
+      grid-template-columns: 1fr 1fr;
+      & img {
+        width: 60%;
+      }
+    }
+  }
+}
